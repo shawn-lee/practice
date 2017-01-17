@@ -8,7 +8,6 @@ void PrintArray(int input[], int n) {
 }
 
 void InsertionSort(int input[], int n) {
-  
   for (int i = 1; i < n; i++) {
     int temp = input[i];
     int j = i - 1;

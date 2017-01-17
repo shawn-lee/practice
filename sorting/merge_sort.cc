@@ -7,45 +7,36 @@ void PrintArray(int input[], int n) {
   std::cout << "}" << std::endl;
 }
 
-void Merge(int input[], int start, int middle, int end) {
-  int temp[end - start + 1] = {};
-  int index_temp = 0;
+void Merge(int input[], int temp[], int start, int middle, int end) {
   for (int i = start; i <= end; i++)
-    temp[index_temp++] = input[i];
+    temp[i] = input[i];
   
   int i = start;
   int j = middle + 1;
   int k = start;
-  int offset = start;
   
   while (i <= middle && j <= end) {
-    if (temp[i - offset] > temp[j - offset]) {
-      input[k] = temp[j - offset];
-      j++;
-    }
-    else {
-      input[k] = temp[i - offset];
-      i++;
-    }
-    k++;
+    if (temp[i] > temp[j])
+      input[k++] = temp[j++];
+    else
+      input[k++] = temp[i++];
   }
   
-  while (i <= middle) {
-    input[k] = temp[i - offset];
-    i++; k++;
-  }
-  while (j <= end) {
-    input[k] = temp[j - offset];
-    j++; k++;
-  } 
+  while (i <= middle)
+    input[k++] = temp[i++];
 }
 
-void MergeSort(int input[], int start, int end) {
+void MergeSortUtil(int input[], int temp[], int start, int end) {
   if (start >= end) return;
   int middle = (end + start) / 2;
-  MergeSort(input, start, middle);
-  MergeSort(input, middle + 1, end);
-  Merge(input, start, middle, end);
+  MergeSortUtil(input, temp, start, middle);
+  MergeSortUtil(input, temp, middle + 1, end);
+  Merge(input, temp, start, middle, end);
+}
+
+void MergeSort(int input[], int n) {
+  int temp[n] = {};
+  MergeSortUtil(input, temp, 0, n - 1);
 }
 
 
@@ -53,6 +44,6 @@ int main() {
   int input[] = {3, 5, 1, 9, 2};
   
   PrintArray(input, 5);
-  MergeSort(input, 0, 4);
+  MergeSort(input, 5);
   PrintArray(input, 5);
 }
