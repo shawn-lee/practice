@@ -1,28 +1,34 @@
 #include <iostream>
 
-void PrintArray(int input[], int n) {
+void PrintArray(const int* arr, int n) {
   std::cout << "{";
   for (int i = 0; i < n; i++)
-    std::cout << input[i] << ",";
+    std::cout << arr[i] << ",";
   std::cout << "}" << std::endl;
 }
 
-void InsertionSort(int input[], int n) {
+void InsertionSort(int* arr, int n) {
   for (int i = 1; i < n; i++) {
-    int temp = input[i];
+    int temp = arr[i];
     int j = i - 1;
-    while (j >=0 && input[j] > temp) {
-      input[j + 1] = input[j];
+    while (j >=0 && arr[j] > temp) {
+      arr[j + 1] = arr[j];
       j--;
     }
-    input[j + 1] = temp;
+    arr[j + 1] = temp;
   }
 }
 
 int main() {
-  int input[] = {3, 5, 1, 9, 2};
+  int n = 5;
+  int* arr = new int[n];
+  arr[0] = 3;
+  arr[1] = 5;
+  arr[2] = 1;
+  arr[3] = 9;
+  arr[4] = 2;
   
-  PrintArray(input, 5);
-  InsertionSort(input, 5);
-  PrintArray(input, 5);
+  PrintArray(arr, n);
+  InsertionSort(arr, n);
+  PrintArray(arr, n);
 }

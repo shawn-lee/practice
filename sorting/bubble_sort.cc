@@ -1,21 +1,21 @@
 #include <iostream>
 
-void PrintArray(int input[], int n) {
+void PrintArray(const int* arr, int n) {
   std::cout << "{";
   for (int i = 0; i < n; i++)
-    std::cout << input[i] << ",";
+    std::cout << arr[i] << ",";
   std::cout << "}" << std::endl;
 }
 
-void BubbleSort(int input[], int n) {
+void BubbleSort(int* arr, int n) {
   bool has_swapped = false;
   do {
     has_swapped = false;
     for (int i = 0; i < n - 1; i++) {
-      if (input[i] > input[i + 1]) {
-        int temp = input[i];
-        input[i] = input[i + 1];
-        input[i + 1] = temp;
+      if (arr[i] > arr[i + 1]) {
+        int temp = arr[i];
+        arr[i] = arr[i + 1];
+        arr[i + 1] = temp;
         has_swapped = true;
       }
     }
@@ -23,9 +23,15 @@ void BubbleSort(int input[], int n) {
 }
 
 int main() {
-  int input[] = {3, 5, 1, 9, 2};
+  int n = 5;
+  int* arr = new int[n];
+  arr[0] = 3;
+  arr[1] = 5;
+  arr[2] = 1;
+  arr[3] = 9;
+  arr[4] = 2;
   
-  PrintArray(input, 5);
-  BubbleSort(input, 5);
-  PrintArray(input, 5);
+  PrintArray(arr, n);
+  BubbleSort(arr, n);
+  PrintArray(arr, n);
 }

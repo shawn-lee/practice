@@ -1,15 +1,15 @@
 #include <iostream>
 
-void PrintArray(int input[], int n) {
+void PrintArray(const int* arr, int n) {
   std::cout << "{";
   for (int i = 0; i < n; i++)
-    std::cout << input[i] << ",";
+    std::cout << arr[i] << ",";
   std::cout << "}" << std::endl;
 }
 
-void Merge(int input[], int temp[], int start, int middle, int end) {
+void Merge(int* arr, int* temp, int start, int middle, int end) {
   for (int i = start; i <= end; i++)
-    temp[i] = input[i];
+    temp[i] = arr[i];
   
   int i = start;
   int j = middle + 1;
@@ -17,33 +17,39 @@ void Merge(int input[], int temp[], int start, int middle, int end) {
   
   while (i <= middle && j <= end) {
     if (temp[i] > temp[j])
-      input[k++] = temp[j++];
+      arr[k++] = temp[j++];
     else
-      input[k++] = temp[i++];
+      arr[k++] = temp[i++];
   }
   
   while (i <= middle)
-    input[k++] = temp[i++];
+    arr[k++] = temp[i++];
 }
 
-void MergeSortUtil(int input[], int temp[], int start, int end) {
+void MergeSortUtil(int* arr, int* temp, int start, int end) {
   if (start >= end) return;
   int middle = (end + start) / 2;
-  MergeSortUtil(input, temp, start, middle);
-  MergeSortUtil(input, temp, middle + 1, end);
-  Merge(input, temp, start, middle, end);
+  MergeSortUtil(arr, temp, start, middle);
+  MergeSortUtil(arr, temp, middle + 1, end);
+  Merge(arr, temp, start, middle, end);
 }
 
-void MergeSort(int input[], int n) {
-  int temp[n] = {};
-  MergeSortUtil(input, temp, 0, n - 1);
+void MergeSort(int* arr, int n) {
+  int* temp = new int[n];
+  MergeSortUtil(arr, temp, 0, n - 1);
 }
 
 
 int main() {
-  int input[] = {3, 5, 1, 9, 2};
+  int n = 5;
+  int* arr = new int[n];
+  arr[0] = 3;
+  arr[1] = 5;
+  arr[2] = 1;
+  arr[3] = 9;
+  arr[4] = 2;
   
-  PrintArray(input, 5);
-  MergeSort(input, 5);
-  PrintArray(input, 5);
+  PrintArray(arr, n);
+  MergeSort(arr, n);
+  PrintArray(arr, n);
 }

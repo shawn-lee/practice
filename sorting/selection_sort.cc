@@ -1,29 +1,35 @@
 #include <iostream>
 
-void PrintArray(int input[], int n) {
+void PrintArray(const int* arr, int n) {
   std::cout << "{";
   for (int i = 0; i < n; i++)
-    std::cout << input[i] << ",";
+    std::cout << arr[i] << ",";
   std::cout << "}" << std::endl;
 }
 
-void SelectionSort(int input[], int n) {
+void SelectionSort(int* arr, int n) {
   for (int i = 0; i < n - 1; i++) {
     int min_index = i;
     for (int j = i + 1; j < n; j++) {
-      if (input[j] < input[min_index])
+      if (arr[j] < arr[min_index])
         min_index = j;
     }
-    int temp = input[i];
-    input[i] = input[min_index];
-    input[min_index] = temp;
+    int temp = arr[i];
+    arr[i] = arr[min_index];
+    arr[min_index] = temp;
   }
 }
 
 int main() {
-  int input[] = {3, 5, 1, 9, 2};
+  int n = 5;
+  int* arr = new int[n];
+  arr[0] = 3;
+  arr[1] = 5;
+  arr[2] = 1;
+  arr[3] = 9;
+  arr[4] = 2;
   
-  PrintArray(input, 5);
-  SelectionSort(input, 5);
-  PrintArray(input, 5);
+  PrintArray(arr, n);
+  SelectionSort(arr, n);
+  PrintArray(arr, n);
 }
