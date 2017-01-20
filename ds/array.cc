@@ -1,16 +1,29 @@
 #include <iostream>
-#include <stdlib>
+#include <vector>
 
 
 int main() {
   int n = 5;
-  int fixed_array[n] = {};
-  int* dynamic_array = new int[n];
-  std::vector<int> vec = new std::vector<int>(n); 
+  int array[n] = {};
+  int* d_array = new int[n];
+  std::vector<int> vec(n);
   
   for (int i = 0; i < n; i++) {
-    fixed_array[i] = i;
-    dynamic_array[i] = i;
-    vec.add(i);
+    array[i] = i;
+    d_array[i] = i;
+    vec[i] = i;
   }
+  
+  for (int i = 0; i < n; i++)
+    std::cout << array[i];
+  std::cout << std::endl;
+  
+  for (int i = 0; i < n; i++)
+    std::cout << d_array[i];
+  std::cout << std::endl;
+  
+  for (int i = 0; i < n; i++)
+    std::cout << vec[i];
+  std::cout << std::endl;
+  
 }
