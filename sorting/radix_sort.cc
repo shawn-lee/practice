@@ -33,7 +33,6 @@ void RadixSort(int* arr, int n) {
       max = arr[i];
   }
   
-  // e represents each digit as the power of 10
   const int base = 10;
   for (int e = 1; max/e > 0; e *= base)
     CountingSort(arr, n, base, e);
