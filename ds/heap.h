@@ -3,6 +3,7 @@
 class Heap {
 public:
   Heap(int n);
+  ~Heap();
   void Insert(int key);
   void Delete(int key);
   int GetMin();

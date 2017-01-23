@@ -13,6 +13,11 @@ Heap::Heap(int n) : capacity(n), size(0) {
   heap_array = new int[n];
 }
 
+Heap::~Heap() {
+  delete heap_array;
+  heap_array = NULL;
+}
+
 void Heap::Insert(int key) {
   if (size == capacity) {
     std::cout << "Cannot insert any more\n";
@@ -92,4 +97,6 @@ int main() {
   std::cout << "New Min = " << h.GetMin() << std::endl;
   
   h.Print();
+  
+  
 }
