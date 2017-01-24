@@ -9,8 +9,17 @@ void Swap(int &a, int &b) {
   b = temp;
 }
 
-Heap::Heap(int n) : capacity(n), size(0) {
-  heap_array = new int[n];
+Heap::Heap(int n) : capacity(n * 2), size(0) {
+  heap_array = new int[capacity];
+}
+
+Heap::Heap(int arr[], int n) : capacity(n * 2), size(n) {
+  heap_array = new int[capacity];
+  for (int i = 0; i < n; i++)
+    heap_array[i] = arr[i];
+  
+  for (int i = (n - 1) /2; i >=0; i--)
+    Heapify(i);
 }
 
 Heap::~Heap() {
@@ -54,7 +63,7 @@ int Heap::ExtractMin() {
 }
 
 void Heap::Print() {
-  for (int i = 0; i < this->size; i++)
+  for (int i = 0; i < size; i++)
     std::cout << heap_array[i] << " ";
   std::cout << std::endl;
 }
@@ -82,7 +91,7 @@ int Heap::Left(int i) { return (i * 2) + 1; }
 int Heap::Right(int i) { return (i * 2) + 2; }
 
 int main() {
-  Heap h(10);
+  Heap h(8);
   h.Insert(4);
   h.Insert(50);
   h.Insert(23);
@@ -91,12 +100,14 @@ int main() {
   h.Insert(32);
   h.Insert(74);
   h.Insert(96);
-  h.Print();
   
+  h.Print();
   std::cout << "Old Min = " << h.ExtractMin() << std::endl;
+  
+  h.Print();
   std::cout << "New Min = " << h.GetMin() << std::endl;
   
-  h.Print();
-  
-  
+  int arr[] = {50, 23, 88, 90, 32, 74, 96, 4};
+  Heap h2(arr, 8);
+  h2.Print();
 }
