@@ -1,0 +1,10 @@
+// definition block
+define
+	CONTROL_MODE_TV = IR
+end
+
+// test block
+test("volume test", 0s, 100)
+	key_send(samsung_tv, volume_up, 1s, 5)
+	key_send(samsung_tv, volume_down, 1s, 5)
+end
